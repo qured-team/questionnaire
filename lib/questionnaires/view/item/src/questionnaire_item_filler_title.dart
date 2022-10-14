@@ -96,6 +96,7 @@ class QuestionnaireItemFillerTitle extends StatelessWidget {
                 ],
               ),
               semanticsLabel: semanticsLabel,
+              textAlign: TextAlign.center,
             ),
           ),
           if (help != null) help,
@@ -205,6 +206,7 @@ class _QuestionnaireItemFillerSupportLink extends StatelessWidget {
 
 class _QuestionnaireItemFillerTitleLeading extends StatelessWidget {
   final Widget _leadingWidget;
+
   const _QuestionnaireItemFillerTitleLeading._(Widget leadingWidget, {Key? key})
       : _leadingWidget = leadingWidget,
         super(key: key);
