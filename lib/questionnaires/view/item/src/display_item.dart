@@ -6,9 +6,15 @@ import 'package:flutter/material.dart';
 class DisplayItem extends QuestionnaireItemFiller {
   DisplayItem(
     QuestionnaireFillerData questionnaireFiller,
-    FillerItemModel fillerItem, {
+    FillerItemModel fillerItem,
+    void Function(String) showHelpBottomSheet, {
     Key? key,
-  }) : super(questionnaireFiller, fillerItem, key: key);
+  }) : super(
+          questionnaireFiller,
+          fillerItem,
+          showHelpBottomSheet,
+          key: key,
+        );
   @override
   State<StatefulWidget> createState() => _DisplayItemState();
 }

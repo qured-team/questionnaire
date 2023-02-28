@@ -21,6 +21,7 @@ class QuestionnaireItemFillerTitle extends StatelessWidget {
   static Widget? fromFillerItem({
     required FillerItemModel fillerItem,
     required QuestionnaireThemeData questionnaireTheme,
+    required void Function(String) showHelpBottomSheet,
     Key? key,
   }) {
     final questionnaireItemModel = fillerItem.questionnaireItemModel;
@@ -31,7 +32,10 @@ class QuestionnaireItemFillerTitle extends StatelessWidget {
     } else {
       final leading =
           _QuestionnaireItemFillerTitleLeading.fromFillerItem(fillerItem);
-      final help = _createHelp(questionnaireItemModel);
+      final help = _createHelp(
+        questionnaireItemModel,
+        showHelpBottomSheet,
+      );
 
       final requiredTag = (questionnaireItemModel.isRequired) ? '*' : '';
 
@@ -93,26 +97,31 @@ class QuestionnaireItemFillerTitle extends StatelessWidget {
                     htmlTitleText,
                     defaultTextStyle: Theme.of(context).textTheme.bodyText2,
                   ),
+                  if (help != null)
+                    WidgetSpan(
+                      child: help,
+                    ),
                 ],
               ),
               semanticsLabel: semanticsLabel,
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.start,
             ),
           ),
-          if (help != null) help,
         ],
       ),
     );
   }
 
   static Widget? _createHelp(
-    QuestionnaireItemModel itemModel, {
+    QuestionnaireItemModel itemModel,
+    void Function(String) showHelpBottomSheet, {
     Key? key,
   }) {
     final helpItem = itemModel.helpTextItem;
 
     if (helpItem != null) {
-      return _QuestionnaireItemFillerHelp(helpItem, key: key);
+      return _QuestionnaireItemFillerHelp(helpItem, showHelpBottomSheet,
+          key: key);
     }
 
     final supportLink = itemModel.questionnaireItem.extension_
@@ -132,8 +141,13 @@ class QuestionnaireItemFillerTitle extends StatelessWidget {
 
 class _QuestionnaireItemFillerHelp extends StatefulWidget {
   final QuestionnaireItemModel ql;
+  final void Function(String) showHelpBottomSheet;
 
-  const _QuestionnaireItemFillerHelp(this.ql, {Key? key}) : super(key: key);
+  const _QuestionnaireItemFillerHelp(
+    this.ql,
+    this.showHelpBottomSheet, {
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _QuestionnaireItemFillerHelpState();
@@ -143,11 +157,12 @@ class _QuestionnaireItemFillerHelpState
     extends State<_QuestionnaireItemFillerHelp> {
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      mouseCursor: SystemMouseCursors.help,
-      icon: const Icon(Icons.help),
-      onPressed: () {
-        _showHelp(context, widget.ql);
+    return GestureDetector(
+      child: const Icon(Icons.help),
+      onTap: () {
+        widget.showHelpBottomSheet(
+          widget.ql.text?.plainText ?? '',
+        );
       },
     );
   }

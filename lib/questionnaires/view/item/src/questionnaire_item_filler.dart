@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 abstract class QuestionnaireItemFiller extends StatefulWidget {
   final QuestionnaireThemeData questionnaireTheme;
   final FillerItemModel fillerItemModel;
+  final void Function(String) showHelpBottomSheet;
 
   String get responseUid => fillerItemModel.nodeUid;
 
   QuestionnaireItemFiller(
     QuestionnaireFillerData questionnaireFiller,
-    this.fillerItemModel, {
+    this.fillerItemModel,
+    this.showHelpBottomSheet, {
     Key? key,
   })  : questionnaireTheme = questionnaireFiller.questionnaireTheme,
         super(key: key);
@@ -36,6 +38,7 @@ abstract class QuestionnaireItemFillerState<W extends QuestionnaireItemFiller>
     _titleWidget = QuestionnaireItemFillerTitle.fromFillerItem(
       fillerItem: widget.fillerItemModel,
       questionnaireTheme: questionnaireTheme,
+      showHelpBottomSheet: widget.showHelpBottomSheet,
     );
   }
 

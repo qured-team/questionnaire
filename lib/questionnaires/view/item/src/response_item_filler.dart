@@ -6,15 +6,18 @@ import 'package:flutter/material.dart';
 abstract class ResponseItemFiller extends QuestionnaireItemFiller {
   final ResponseItemModel responseItemModel;
   final QuestionnaireItemModel questionnaireItemModel;
+  final void Function(String) showHelpBottomSheet;
 
   ResponseItemFiller(
     QuestionnaireFillerData questionnaireFiller,
-    this.responseItemModel, {
+    this.responseItemModel,
+    this.showHelpBottomSheet, {
     Key? key,
   })  : questionnaireItemModel = responseItemModel.questionnaireItemModel,
         super(
           questionnaireFiller,
           responseItemModel,
+          showHelpBottomSheet,
           key: key,
         );
 }

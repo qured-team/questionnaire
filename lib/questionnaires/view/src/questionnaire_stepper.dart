@@ -56,7 +56,10 @@ class QuestionnaireStepperState extends State<QuestionnaireStepper> {
                     itemCount: itemCount,
                     itemBuilder: (BuildContext context, int index) {
                       return QuestionnaireResponseFiller.of(context)
-                          .itemFillerAt(index);
+                          .itemFillerAt(
+                        index,
+                        (_) {},
+                      );
                     },
                   ),
                 ),

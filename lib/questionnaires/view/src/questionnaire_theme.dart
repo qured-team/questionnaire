@@ -90,25 +90,29 @@ class QuestionnaireThemeData {
   /// Used by [QuestionnaireResponseFiller].
   QuestionnaireItemFiller createQuestionnaireItemFiller(
     QuestionnaireFillerData questionnaireFiller,
-    FillerItemModel fillerItemModel, {
+    FillerItemModel fillerItemModel,
+    void Function(String) showHelpBottomSheet, {
     Key? key,
   }) {
     if (fillerItemModel is QuestionItemModel) {
       return QuestionResponseItemFiller(
         questionnaireFiller,
         fillerItemModel,
+        showHelpBottomSheet,
         key: key,
       );
     } else if (fillerItemModel is GroupItemModel) {
       return GroupItem(
         questionnaireFiller,
         fillerItemModel,
+        showHelpBottomSheet,
         key: key,
       );
     } else if (fillerItemModel is DisplayItemModel) {
       return DisplayItem(
         questionnaireFiller,
         fillerItemModel,
+        showHelpBottomSheet,
         key: key,
       );
     } else {
