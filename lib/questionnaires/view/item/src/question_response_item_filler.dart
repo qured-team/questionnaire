@@ -8,12 +8,16 @@ import 'package:flutter/material.dart';
 /// Filler for a [QuestionnaireResponseItem].
 class QuestionResponseItemFiller extends ResponseItemFiller {
   final QuestionItemModel questionResponseItemModel;
+  final void Function(String) showHelpBottomSheet;
 
   QuestionResponseItemFiller(
     QuestionnaireFillerData questionnaireFiller,
-    this.questionResponseItemModel, {
+    this.questionResponseItemModel,
+    this.showHelpBottomSheet, {
     Key? key,
-  }) : super(questionnaireFiller, questionResponseItemModel, key: key);
+  }) : super(
+            questionnaireFiller, questionResponseItemModel, showHelpBottomSheet,
+            key: key);
 
   @override
   State<StatefulWidget> createState() => QuestionResponseItemFillerState();

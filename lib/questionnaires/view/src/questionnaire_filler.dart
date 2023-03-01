@@ -258,7 +258,10 @@ class QuestionnaireFillerData extends InheritedWidget {
   /// The [QuestionnaireItemFiller]s are ordered based on 'pre-order'.
   ///
   /// see: https://en.wikipedia.org/wiki/Tree_traversal#Pre-order,_NLR
-  QuestionnaireItemFiller itemFillerAt(int index) {
+  QuestionnaireItemFiller itemFillerAt(
+    int index,
+    void Function(String) showHelpBottomSheet,
+  ) {
     _logger.trace('itemFillerAt $index');
 
     if (_itemFillers[index] == null) {
@@ -266,6 +269,7 @@ class QuestionnaireFillerData extends InheritedWidget {
       _itemFillers[index] = questionnaireTheme.createQuestionnaireItemFiller(
         this,
         fillerItemModels.elementAt(index),
+        showHelpBottomSheet,
         key: ValueKey<String>(
           'item-filler-${fillerItemModels.elementAt(index).nodeUid}',
         ),

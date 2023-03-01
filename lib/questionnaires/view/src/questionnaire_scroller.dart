@@ -202,7 +202,10 @@ class _QuestionnaireScrollerState extends State<QuestionnaireScroller> {
                                 ),
                           ),
                           child: QuestionnaireResponseFiller.of(context)
-                              .itemFillerAt(i),
+                              .itemFillerAt(
+                            i,
+                            (_) {},
+                          ),
                         ),
                         const Spacer(),
                       ],
